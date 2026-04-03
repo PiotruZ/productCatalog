@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="03-seed-producers" author="you">
+        <insert tableName="producers">
+            <column name="name" value="Samsung"/>
+            <column name="country" value="South Korea"/>
+        </insert>
+        <insert tableName="producers">
+            <column name="name" value="Apple"/>
+            <column name="country" value="United States"/>
+        </insert>
+        <insert tableName="producers">
+            <column name="name" value="Sony"/>
+            <column name="country" value="Japan"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="04-seed-products" author="you">
+        <insert tableName="products">
+            <column name="name" value="Galaxy S24"/>
+            <column name="price" value="999.99"/>
+            <column name="producer_id" valueComputed="(SELECT id FROM producers WHERE name='Samsung')"/>
+            <column name="attributes" value='{"color":"black","weight_g":167,"screen_size_inch":6.2,"battery_mah":4000,"5g":true}'/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="iPhone 15"/>
+            <column name="price" value="1099.99"/>
+            <column name="producer_id" valueComputed="(SELECT id FROM producers WHERE name='Apple')"/>
+            <column name="attributes" value='{"color":"blue","weight_g":171,"screen_size_inch":6.1,"battery_mah":3877,"5g":true}'/>
+        </insert>
+        <insert tableName="products">
+            <column name="name" value="BRAVIA XR A95L"/>
+            <column name="price" value="2499.99"/>
+            <column name="producer_id" valueComputed="(SELECT id FROM producers WHERE name='Sony')"/>
+            <column name="attributes" value='{"screen_size_inch":55,"resolution":"4K","panel_type":"OLED","hdmi_ports":4,"weight_kg":22.1}'/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
