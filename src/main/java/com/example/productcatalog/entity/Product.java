@@ -33,7 +33,7 @@ public class Product {
     private Producer producer;
 
     @Convert(converter = JsonAttributeConverter.class)
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "CLOB")
     private Map<String, Object> attributes = new HashMap<>();
 
     @Column(name = "created_at", nullable = false, updatable = false)
