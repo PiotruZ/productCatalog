@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -86,6 +87,16 @@ public class ProductService {
         }
         productRepository.deleteById(id);
         log.info("Deleted product with id {}", id);
+    }
+
+    public List<ProductResponse> searchProducts(Long producerId, BigDecimal minPrice,
+                                                BigDecimal maxPrice, String name) {
+        log.info("Searching products - producerId: {}, minPrice: {}, maxPrice: {}, name: {}",
+                producerId, minPrice, maxPrice, name);
+        return productRepository.searchProducts(producerId, minPrice, maxPrice, name)
+                .stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     private ProductResponse toResponse(Product product) {
